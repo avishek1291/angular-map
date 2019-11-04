@@ -1,10 +1,23 @@
 import { Injectable } from '@angular/core';
-
+import * as io from 'socket.io-client';
+import { Observable} from 'rxjs/observable';
+import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class MapService {
+  private chatUrl = 'http://localhost:9000/';
 
-  constructor() { }
-  getMarker() {
+  private socket;
+
+  public message = new Subject<any>();
+  constructor() {
+    this.socket = io(this.chatUrl);
+    this.socket.on('new-message', (message) => {
+// console.log(message, 'received');
+      this.message.next(message);
+    });
+
+  }
+  getMarker(data: Array<any>) {
     const geoJson = [{
       'type': 'Feature',
         'geometry': {
@@ -27,6 +40,21 @@ export class MapService {
         }
 
     }];
+    data.forEach(aPosition => {
+      if (aPosition.position){
+      const tempObj = {
+         type: 'Feature',
+         geometry: {
+           'type': 'Point',
+           coordinates: [aPosition.position[1], aPosition.position[0]]
+         },
+         'properties': {
+           'message': aPosition.title
+         }
+      };
+      geoJson.push(tempObj);
+  }
+     });
     return geoJson;
   }
 }
