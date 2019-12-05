@@ -21,6 +21,7 @@
       "styles": [
         "../node_modules/mapbox-gl/dist/mapbox-gl.css",
         "../node_modules/@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css",
+        "../node_modules/@mapbox/mapbox-gl-traffic/mapbox-gl-traffic.css",
         "styles.css"
       ],
       "scripts": ["../node_modules/mapbox-gl/dist/mapbox-gl.js","../node_modules/@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.js" ],

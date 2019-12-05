@@ -13,7 +13,7 @@ export class MapService {
     this.socket = io(this.chatUrl);
     this.socket.on('new-message', (message) => {
 // console.log(message, 'received');
-      this.message.next(message);
+      this.message.next(message.results);
     });
 
   }
@@ -41,7 +41,7 @@ export class MapService {
 
     }];
     data.forEach(aPosition => {
-      if (aPosition.position){
+      if (aPosition.position) {
       const tempObj = {
          type: 'Feature',
          geometry: {
@@ -49,7 +49,12 @@ export class MapService {
            coordinates: [aPosition.position[1], aPosition.position[0]]
          },
          'properties': {
-           'message': aPosition.title
+           'message': aPosition.title + '20',
+            'icon': {
+              className: 'my-icon', // class name to style
+              html: '★', // add content inside the marker, in this case a star
+              iconSize: null // size of icon, use null to set the size in CSS
+            }
          }
       };
       geoJson.push(tempObj);
