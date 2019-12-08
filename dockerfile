@@ -1,5 +1,5 @@
 FROM node:11.6.0-alpine AS builder
-COPY package.json /workspace
+COPY package.json /workspace /container/workspace
 WORKDIR /container/workspace
 RUN npm i
 RUN npm run build
