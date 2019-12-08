@@ -1,8 +1,8 @@
 FROM node:11.6.0-alpine AS builder
-COPY . ./angular-map
+COPY package.json /workspace
 WORKDIR /workspace
 RUN npm i
-RUN $(npm bin)/ng build
+RUN npm run build
 
 FROM nginx:1.15.8-alpine
 COPY --from=builder /angular-map/dist  /usr/share/nginx/html
