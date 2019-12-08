@@ -5,5 +5,3 @@ RUN npm i
 COPY . .
 RUN npm run-script build
 
-FROM nginx:1.15.8-alpine
-COPY --from=builder /workspace/dist  /usr/share/nginx/html
