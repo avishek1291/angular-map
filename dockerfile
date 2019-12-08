@@ -3,6 +3,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm i
 COPY . .
+RUN npm i -g @angular/cli
 RUN sudo npm run build
 
 FROM nginx:1.15.8-alpine
